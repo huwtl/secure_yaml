@@ -28,8 +28,8 @@ def encrypt(plain_data)
   encrypted_data = Base64.strict_encode64(aes.update(plain_data) + aes.final)
 end
 
-@passphrase = ENV["PROP_PASSPHRASE"]
-raise "PROP_PASSPHRASE env property not found" if @passphrase.nil?
+@passphrase = ENV["PROPERTIES_ENCRYPTION_PASSWORD"]
+raise "PROPERTIES_ENCRYPTION_PASSWORD env property not found" if @passphrase.nil?
 
 p decrypt_yaml(YAML::load(File.open('test.yml')))
 

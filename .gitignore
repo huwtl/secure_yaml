@@ -1,0 +1,13 @@
+.*
+!.gitignore
+!.rvmrc
+*.log
+*.iws
+*.orig
+*.iml
+*.ipr
+.idea
+*.ids
+*.gem
+.bundle
+Gemfile.lock
