@@ -1,2 +1,2 @@
-yaml_encryption
+secure_yaml
 ===============
