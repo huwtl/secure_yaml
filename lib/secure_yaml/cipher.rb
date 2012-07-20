@@ -9,13 +9,13 @@ module SecureYaml
     def encrypt(secret_key, plain_data)
       cipher = create_cipher(secret_key)
       cipher.encrypt
-      Base64.strict_encode64(cipher.update(plain_data) + cipher.final)
+      strip_newline_chars_from_base64(Base64.encode64(cipher.update(plain_data) + cipher.final))
     end
 
     def decrypt(secret_key, encrypted_data)
       cipher = create_cipher(secret_key)
       cipher.decrypt
-      cipher.update(Base64.strict_decode64(encrypted_data)) + cipher.final
+      cipher.update(Base64.decode64(encrypted_data)) + cipher.final
     end
     
     private
@@ -25,6 +25,10 @@ module SecureYaml
       cipher.encrypt
       cipher.key = Digest::SHA2.new(256).digest(secret_key)
       cipher
+    end
+
+    def strip_newline_chars_from_base64(base64)
+      base64.gsub("\n", '')
     end
 
   end
