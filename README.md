@@ -58,6 +58,7 @@ export PROPERTIES_ENCRYPTION_PASSWORD=abc12345678; ruby app.rb
 
 <strong>*** The value of the secret key must NOT be submitted to source control. Knowing the secret key allows a person to easily decrypt your properties.</strong>
 <br />
+<br />
 
 <strong>4) Load and use the decrypted version of your YAML file within your app</strong>
 

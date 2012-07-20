@@ -15,6 +15,7 @@ module SecureYaml
   def self.secret_key(secret_key_prop_name)
     secret_key = ENV[secret_key_prop_name]
     raise "#{secret_key_prop_name} env property not found" if secret_key.nil?
+    secret_key
   end
 
 end
