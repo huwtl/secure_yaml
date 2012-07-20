@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'Loader' do
 
   before(:each) do
-    @encrypted_yaml = {prop: 'encrypted'}
-    @decrypted_yaml = {prop: 'decrytped'}
+    @encrypted_yaml = {:prop => 'encrypted'}
+    @decrypted_yaml = {:prop => 'decrytped'}
     @decrypter = double(SecureYaml::YamlDecrypter)
     SecureYaml::YamlDecrypter.stub(:new).and_return(@decrypter)
   end

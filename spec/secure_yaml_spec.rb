@@ -4,7 +4,7 @@ describe 'SecureYaml' do
 
   before(:each) do
     @secret_key = 'secret key'
-    @yaml = {prop: 'test'}
+    @yaml = {:prop => 'test'}
     loader = double(SecureYaml::Loader)
     loader.stub(:load).and_return(@yaml)
     SecureYaml::Loader.stub(:new).with(@secret_key).and_return(loader)
