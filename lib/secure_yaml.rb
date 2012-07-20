@@ -1,19 +1,20 @@
-require './lib/secure_yaml/yaml_decryption'
+require 'secure_yaml/loader'
 
 module SecureYaml
 
-  class SecureYaml
+  ENCRYPTED_PROPERTY_WRAPPER_ID = 'ENC'
 
-    def initialize(yaml_decryption = YamlDecryption.new(@passphrase))
-      @passphrase = ENV["PROPERTIES_ENCRYPTION_PASSWORD"]
-      raise "PROPERTIES_ENCRYPTION_PASSWORD env property not found" if @passphrase.nil?
-      @yaml_decryption = yaml_decryption
-    end
+  DEFAULT_SECRET_KEY_PROP_NAME = 'PROPERTIES_ENCRYPTION_PASSWORD'
 
-    def load(yaml_file)
-      p @yaml_decryption.decrypt(YAML::load(yaml_file))
-    end
+  def self.load(yaml_file, secret_key_prop_name = DEFAULT_SECRET_KEY_PROP_NAME)
+    SecureYaml::Loader.new(secret_key(secret_key_prop_name)).load(yaml_file)
+  end
 
+  private
+
+  def self.secret_key(secret_key_prop_name)
+    secret_key = ENV[secret_key_prop_name]
+    raise "#{secret_key_prop_name} env property not found" if secret_key.nil?
   end
 
 end

@@ -1,8 +1,0 @@
-production:
-  key: ENC(kvc3CU7XqUGTkGqswCo0p+h7uxw/aBysDbjjLjkPxSK5WrEZwPqylAg1hE+fjSBDEAjfgoqlGbnspsRUyf4pxxueExuC6CQd4A==)
-  something: hello
-  else: 
-    a: 1
-    b: ENC(kvc3CU7XqUGTkGqswCo0p+h7uxw/aBysDbjjLjkPxSK5WrEZwPqylAg1hE+fjSBDEAjfgoqlGbnspsRUyf4pxxueExuC6CQd4A==)
-    c: aENC(123)
-    d: ENC(DSFSDFSDFSDFSDsdfdsfsdfs

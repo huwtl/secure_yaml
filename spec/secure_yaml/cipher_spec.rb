@@ -1,8 +1,8 @@
-require './lib/secure_yaml/cipher'
+require 'spec_helper'
 
 describe 'Cipher' do
 
-  before(:all) do
+  before(:each) do
     @cipher = SecureYaml::Cipher.new
     @secret_key = "abc12345678"
     @plain_text = "some plain text to encrypt"

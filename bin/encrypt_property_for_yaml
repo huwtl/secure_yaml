@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "secure_yaml/cli/property_encryption_application"
+
+SecureYaml::PropertyEncryptionApplication.new.execute(ARGV)
