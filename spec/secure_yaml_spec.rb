@@ -7,7 +7,7 @@ describe 'SecureYaml' do
     @yaml = {:prop => 'test'}
     loader = double(SecureYaml::Loader)
     loader.stub(:load).and_return(@yaml)
-    SecureYaml::Loader.stub(:new).with(@secret_key).and_return(loader)
+    SecureYaml::Loader.stub(:new).and_return(loader)
   end
 
   it 'should load decrypted yaml file' do
@@ -30,6 +30,16 @@ describe 'SecureYaml' do
     ENV[custom_secret_key_prop_name] = @secret_key
 
     yaml = SecureYaml::load(double(File), custom_secret_key_prop_name)
+
+    yaml.should == @yaml
+  end
+
+  it 'should allow use of custom decryption algorithm' do
+    ENV[SecureYaml::DEFAULT_SECRET_KEY_PROP_NAME] = @secret_key
+
+    yaml = SecureYaml::load(double(File)) do |secret_key, encrypted_data|
+      "decrypt data here from #{secret_key} and #{encrypted_data}"
+    end
 
     yaml.should == @yaml
   end

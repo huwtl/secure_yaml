@@ -11,7 +11,7 @@ module SecureYaml
       secret_key = command_line_args[0]
       plain_text = command_line_args[1]
 
-      puts "#{SecureYaml::ENCRYPTED_PROPERTY_WRAPPER_ID}(#{SecureYaml::Cipher.new.encrypt(secret_key, plain_text)})"
+      puts "#{ENCRYPTED_PROPERTY_WRAPPER_ID}(#{Cipher.new.encrypt(secret_key, plain_text)})"
     end
 
   end

@@ -5,7 +5,7 @@ describe 'Yaml decrypter' do
   before(:each) do
     @secret_key = 'abc12345678'
     @cipher = double(SecureYaml::Cipher)
-    @decrypter = SecureYaml::YamlDecrypter.new(@secret_key, @cipher)
+    @decrypter = SecureYaml::YamlDecrypter.new(@cipher, @secret_key)
     @decrypted_result = 'decrypted data'
     @plain_text = 'some plain text'
   end

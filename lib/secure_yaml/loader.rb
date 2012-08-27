@@ -4,12 +4,12 @@ module SecureYaml
 
   class Loader
 
-    def initialize(secret_key)
-      @decrypter = YamlDecrypter.new(secret_key)
+    def initialize(yaml_decrypter)
+      @yaml_decrypter = yaml_decrypter
     end
 
     def load(yaml_file)
-      @decrypter.decrypt(YAML::load(yaml_file))
+      @yaml_decrypter.decrypt(YAML::load(yaml_file))
     end
 
   end
