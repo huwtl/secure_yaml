@@ -68,7 +68,9 @@ require 'secure_yaml'
 decrypted_yaml = SecureYaml::load(File.open('database.yml'))
 
 # Alternatively, to override the default secret key environmental property name:
-decrypted_yaml = SecureYaml::load(File.open('database.yml'), 'NEW_SECRET_KEY_PROPERTY_NAME')
+decrypted_yaml = SecureYaml::load(File.open('database.yml'), {
+  :secret_key_property_name => 'NEW_SECRET_KEY_PROPERTY_NAME'
+})
 ```
 
 <br />
