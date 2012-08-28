@@ -71,17 +71,24 @@ decrypted_yaml = SecureYaml::load(File.open('database.yml'))
 decrypted_yaml = SecureYaml::load(File.open('database.yml'), 'NEW_SECRET_KEY_PROPERTY_NAME')
 ```
 
+<br />
 ### Customising decryption
 
 The default decryption method applied by this library when loading a YAML file is [AES-256-CFB](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
-However, if you wish to, you can specify your own custom decryption:
+However, if you wish to, you can specify your own custom decryption algorithm:
 
 ```ruby
 require 'secure_yaml'
 
-decrypted_yaml = SecureYaml::load(File.open('database.yml')) do |secret_key, encrypted_data|
-  "decrypt data here from #{secret_key} and #{encrypted_data}"
-end
+custom_decryption_algorithm = Class.new {
+  def self.decrypt(secret_key, encrypted_data)
+    "your decrypted data returned here"
+  end
+}
+
+decrypted_yaml = SecureYaml::load(File.open('database.yml'), {
+  :decryption_algorithm => custom_decryption_algorithm
+})
 ```
 
 
