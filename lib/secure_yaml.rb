@@ -7,10 +7,11 @@ module SecureYaml
 
   DEFAULT_SECRET_KEY_PROP_NAME = 'PROPERTIES_ENCRYPTION_PASSWORD'
 
-  def self.load(yaml_file, secret_key_prop_name = DEFAULT_SECRET_KEY_PROP_NAME, &decryption_block)
-    decryption_algorithm = block_given? ? custom_decryption_algorithm(decryption_block) : Cipher.new
+  def self.load(yaml_file, opts = {})
+    opts[:secret_key_property_name] ||= DEFAULT_SECRET_KEY_PROP_NAME
+    opts[:decryption_algorithm] ||= Cipher.new
 
-    yaml_loader(decryption_algorithm, retrieve_secret_key(secret_key_prop_name)).load(yaml_file)
+    yaml_loader(opts[:decryption_algorithm], retrieve_secret_key(opts[:secret_key_property_name])).load(yaml_file)
   end
 
   private
@@ -19,18 +20,6 @@ module SecureYaml
     secret_key = ENV[secret_key_prop_name]
     raise "#{secret_key_prop_name} env property not found" if secret_key.nil?
     secret_key
-  end
-
-  def self.custom_decryption_algorithm(decryption_block)
-    Class.new {
-      def initialize(decryption_block)
-        @decryption_block = decryption_block
-      end
-
-      def decrypt(secret_key, encrypted_data)
-        @decryption_block.call(secret_key, encrypted_data)
-      end
-    }.new(decryption_block)
   end
 
   def self.yaml_loader(decryption_algorithm, secret_key)
