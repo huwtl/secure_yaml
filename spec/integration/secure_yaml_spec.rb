@@ -11,7 +11,7 @@ describe 'SecureYaml' do
   it 'should load decrypted yaml file using default decryption algorithm' do
     yaml = SecureYaml::load(@test_yaml_file)
 
-    yaml.should == {:plain_prop => '1234', :encrypted_prop => 'secret-text'}
+    yaml.should == {'plain_prop' => '1234', 'encrypted_prop' => 'secret-text'}
   end
 
   it 'should load decrypted yaml file using custom decryption algorithm' do
@@ -23,7 +23,7 @@ describe 'SecureYaml' do
 
     yaml = SecureYaml::load(@test_yaml_file, {:decryption_algorithm => custom_decryption_algorithm})
 
-    yaml.should == {:plain_prop => '1234', :encrypted_prop => 'decrypted!'}
+    yaml.should == {'plain_prop' => '1234', 'encrypted_prop' => 'decrypted!'}
   end
 
 end
