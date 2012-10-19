@@ -14,7 +14,7 @@ module SecureYaml
         when Hash
           yaml.inject({}) {|new_hash, (key, value)| new_hash[key] = decrypt(value); new_hash}
         when String
-          yaml.gsub(/^#{ENCRYPTED_PROPERTY_WRAPPER_ID}\((.*)\)$/) {@decryption_algorithm.decrypt(@secret_key, $1)}
+          yaml.gsub(/\b#{ENCRYPTED_PROPERTY_WRAPPER_ID}\((.*)\)(?:\b|$)/) {@decryption_algorithm.decrypt(@secret_key, $1)}
         else
           yaml
       end
