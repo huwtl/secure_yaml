@@ -10,6 +10,14 @@ describe 'Yaml decrypter' do
     @plain_text = 'some plain text'
   end
 
+  it 'should decrypt encoded values in plain strings' do
+    encrypted_data = 'encrypted data'
+    @cipher.stub(:decrypt).with(@secret_key, encrypted_data).and_return(@decrypted_result)
+    hash = {:encrypted_prop => "ENC(#{encrypted_data})", :plain_prop => @plain_text}
+    data = @decrypter.decrypt(hash.to_yaml)
+    YAML.load(data).should == {:encrypted_prop => @decrypted_result, :plain_prop => @plain_text}
+  end
+
   it 'should decrypt only marked encrypted properties' do
     encrypted_data = 'encrypted data'
     @cipher.stub(:decrypt).with(@secret_key, encrypted_data).and_return(@decrypted_result)
