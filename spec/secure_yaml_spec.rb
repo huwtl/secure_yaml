@@ -16,11 +16,20 @@ describe 'SecureYaml' do
     @loader.stub(:load).and_return(@yaml)
   end
 
-  it 'should load decrypted yaml file' do
+  it 'should load encrypted yaml file' do
     ENV[SecureYaml::DEFAULT_SECRET_KEY_PROP_NAME] = @secret_key
     SecureYaml::YamlDecrypter.stub(:new).with(@default_decryption_algorithm, @secret_key).and_return(@yaml_decrypter)
 
     yaml = SecureYaml::load(double(File))
+
+    yaml.should == @yaml
+  end
+
+  it 'should parse encrypted yaml string' do
+    ENV[SecureYaml::DEFAULT_SECRET_KEY_PROP_NAME] = @secret_key
+    SecureYaml::YamlDecrypter.stub(:new).with(@default_decryption_algorithm, @secret_key).and_return(@yaml_decrypter)
+
+    yaml = SecureYaml::parse("")
 
     yaml.should == @yaml
   end

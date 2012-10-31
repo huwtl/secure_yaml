@@ -74,6 +74,15 @@ decrypted_yaml = SecureYaml::load(File.open('database.yml'), {
 ```
 
 <br />
+<strong>4) Parse and use the decrypted version of a YAML string within your app</strong>
+
+```ruby
+require 'secure_yaml'
+
+decrypted_yaml = SecureYaml::parse("some correctly formatted yaml text")
+```
+<br />
+
 ### Customising decryption
 
 The default decryption method applied by this library when loading a YAML file is [AES-256-CFB](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard).

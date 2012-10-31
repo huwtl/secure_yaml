@@ -14,6 +14,10 @@ module SecureYaml
     yaml_loader(opts[:decryption_algorithm], retrieve_secret_key(opts[:secret_key_property_name])).load(yaml_file)
   end
 
+  def self.parse(yaml, opts = {})
+    load(StringIO.new(yaml), opts)
+  end
+
   private
 
   def self.retrieve_secret_key(secret_key_prop_name)
