@@ -19,7 +19,7 @@ This library attempts to address this concern by allowing sensitive information 
 The gem provides a simple command line utility called ```encrypt_property_for_yaml``` that prints out the encrypted form of a plain text property.
 
 ```
-USAGE: encrypt_property_for_yaml <SECRET_KEY> <PROPERTY_VALUE_TO_ENCRYPT>
+USAGE: encrypt_property_for_yaml encrypt|decrypt <SECRET_KEY> <PROPERTY_VALUE_TO_ENCRYPT>
 ```
 
 For example:
