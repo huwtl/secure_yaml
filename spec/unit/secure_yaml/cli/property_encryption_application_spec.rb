@@ -15,7 +15,7 @@ describe 'Property encryption command line interface' do
 
     $stdout.should_receive(:puts).with("#{SecureYaml::ENCRYPTED_PROPERTY_WRAPPER_ID}(#{@encrypted_text})")
 
-    SecureYaml::PropertyEncryptionApplication.new.execute([@secret_key, @plain_text])
+    SecureYaml::PropertyEncryptionApplication.new.execute(["encrypt", @secret_key, @plain_text])
   end
 
   it 'should raise error unless secret key and plain text have been included as command line args' do
@@ -24,7 +24,7 @@ describe 'Property encryption command line interface' do
   end
 
   it 'should raise error if too many comand line args' do
-    expect {SecureYaml::PropertyEncryptionApplication.new.execute([@secret_key, @plain_text, 'unexpected'])}.to raise_error
+    expect {SecureYaml::PropertyEncryptionApplication.new.execute(["encrypt", @secret_key, @plain_text, 'unexpected'])}.to raise_error
   end
 
 end

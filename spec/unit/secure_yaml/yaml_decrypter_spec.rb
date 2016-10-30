@@ -52,6 +52,15 @@ describe 'Yaml decrypter' do
     data.should == {:parent_prop => {:nested_prop => @decrypted_result, :parent_prop_2 => {:nested_prop_2 => @decrypted_result}}}
   end
 
+  it 'should decrypt encrypted properties of array elements' do
+    encrypted_data = 'encrypted data'
+    @cipher.stub(:decrypt).and_return(@decrypted_result)
+
+    data = @decrypter.decrypt([{:encrypted_prop => "ENC(#{encrypted_data})"}])
+
+    data.should == [{:encrypted_prop => @decrypted_result}]
+  end
+
   it 'should ignore any property of non-string type' do
     numeric_prop = {:numeric => 1}
 
